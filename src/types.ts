@@ -1,3 +1,5 @@
+import { Falling } from './playerStates/Falling';
+import { Jumping } from './playerStates/Jumping';
 import { Running } from './playerStates/Running';
 import { Sitting } from './playerStates/Sitting';
 
@@ -10,4 +12,4 @@ export enum State {
 	FALLING
 }
 
-export type StateClass = Sitting | Running;
+export type StateClass = Sitting | Running | Jumping | Falling;
