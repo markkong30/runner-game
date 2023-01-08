@@ -25,3 +25,9 @@
 #city-5 {
 	display: none;
 }
+
+#enemy-fly,
+#enemy-plant,
+#enemy-spider {
+	display: none;
+}

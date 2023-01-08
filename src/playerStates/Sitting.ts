@@ -17,9 +17,9 @@ export class Sitting extends RootState {
 
 	handleInput(input: Key[]) {
 		if (input.includes('ArrowLeft') || input.includes('ArrowRight')) {
-			this.player.setState(State.RUNNING);
+			this.player.setState(State.RUNNING, 1);
 		} else if (input.includes('ArrowUp')) {
-			this.player.setState(State.JUMPING);
+			this.player.setState(State.RUNNING, 1);
 		}
 	}
 }

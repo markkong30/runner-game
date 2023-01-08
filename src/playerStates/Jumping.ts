@@ -21,7 +21,7 @@ export class Jumping extends RootState {
 
 	handleInput(input: Key[]) {
 		if (this.player.vy > this.player.gravity) {
-			this.player.setState(State.FALLING);
+			this.player.setState(State.FALLING, 1);
 		}
 	}
 }

@@ -17,7 +17,7 @@ export class Falling extends RootState {
 
 	handleInput(input: Key[]) {
 		if (this.player.onGround()) {
-			this.player.setState(State.RUNNING);
+			this.player.setState(State.RUNNING, 1);
 		}
 	}
 }

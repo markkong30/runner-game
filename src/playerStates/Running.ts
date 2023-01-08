@@ -17,9 +17,9 @@ export class Running extends RootState {
 
 	handleInput(input: Key[]) {
 		if (input.includes('ArrowDown')) {
-			this.player.setState(State.SITTING);
+			this.player.setState(State.SITTING, 0);
 		} else if (input.includes('ArrowUp')) {
-			this.player.setState(State.JUMPING);
+			this.player.setState(State.JUMPING, 1);
 		}
 	}
 }
