@@ -1,8 +1,18 @@
+const webpack = require('webpack');
 const path = require('path');
+const HtmlWebpackPlugin = require('html-webpack-plugin');
+const MiniCssExtractPlugin = require('mini-css-extract-plugin');
 
 module.exports = {
 	mode: 'production',
+	target: 'web',
+	devtool: 'cheap-module-source-map',
 	entry: path.resolve(__dirname, './src/index.ts'),
+	output: {
+		path: path.resolve(__dirname, 'build'),
+		publicPath: '/',
+		filename: 'bundle.js'
+	},
 	module: {
 		rules: [
 			{
@@ -24,11 +34,19 @@ module.exports = {
 			}
 		]
 	},
+	plugins: [
+		new webpack.DefinePlugin({
+			'process.env.API_URL': JSON.stringify('http://localhost:3001')
+		}),
+		new HtmlWebpackPlugin({
+			template: 'public/index.html'
+		}),
+		new MiniCssExtractPlugin({
+			filename: '[name].[hash].css',
+			chunkFilename: '[id].[hash].css'
+		})
+	],
 	resolve: {
 		extensions: ['.ts', '.js']
-	},
-	output: {
-		filename: 'script.js',
-		path: path.resolve(__dirname, 'public', 'static', 'bundle')
 	}
 };

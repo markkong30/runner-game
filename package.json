@@ -2,15 +2,17 @@
 	"name": "runner-game",
 	"version": "1.0.0",
 	"description": "",
-	"main": "index.js",
+	"main": "index.ts",
 	"scripts": {
-		"start": "webpack --watch",
-		"build": "webpack",
+		"start": "webpack serve --config webpack.config.js --port 3000",
+		"build": "webpack --config webpack.config.js",
 		"test": "echo \"Error: no test specified\" && exit 1"
 	},
-	"author": "",
+	"author": "Mark Kong",
 	"license": "ISC",
 	"dependencies": {
+		"html-webpack-plugin": "^5.5.0",
+		"mini-css-extract-plugin": "^2.7.2",
 		"ts-loader": "^9.4.2",
 		"typescript": "^4.9.4",
 		"webpack-cli": "^5.0.1"
@@ -19,6 +21,7 @@
 		"file-loader": "^6.2.0",
 		"sass": "^1.57.1",
 		"sass-loader": "^13.2.0",
-		"webpack": "^5.75.0"
+		"webpack": "^5.75.0",
+		"webpack-dev-server": "^4.11.1"
 	}
 }
