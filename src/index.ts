@@ -1,4 +1,5 @@
 import { Background } from './background/background';
+import { Display } from './display';
 import { ClimbingEnemy } from './enemies/climbingEnemy';
 import { Enemy } from './enemies/enemy';
 import { FlyingEnemy } from './enemies/flyingEnemy';
@@ -10,7 +11,7 @@ const canvas = document.querySelector<HTMLCanvasElement>(
 	'#canvas-1'
 ) as HTMLCanvasElement;
 const ctx = canvas?.getContext('2d') as CanvasRenderingContext2D;
-canvas.width = 500;
+canvas.width = 1000;
 canvas.height = 500;
 
 export class Game {
@@ -22,9 +23,13 @@ export class Game {
 	background: Background;
 	player: Player;
 	input: KeyboardHandler;
+	display: Display;
 	enemies: Enemy[];
 	enemyTimer: number;
 	enemyInterval: number;
+	debug: boolean;
+	score: number;
+	fontColor: string;
 
 	constructor(width: number, height: number) {
 		this.width = width;
@@ -34,10 +39,14 @@ export class Game {
 		this.maxSpeed = 2;
 		this.background = new Background(this);
 		this.player = new Player(this);
-		this.input = new KeyboardHandler();
+		this.input = new KeyboardHandler(this);
+		this.display = new Display(this);
 		this.enemies = [];
 		this.enemyTimer = 0;
 		this.enemyInterval = 1000;
+		this.debug = false;
+		this.score = 0;
+		this.fontColor = 'black';
 	}
 
 	update(deltaTime: number) {
@@ -60,6 +69,7 @@ export class Game {
 	draw(context: CanvasRenderingContext2D) {
 		this.background.draw(context);
 		this.player.draw(context);
+		this.display.draw(context);
 		this.enemies.forEach((enemy) => {
 			enemy.draw(context);
 		});

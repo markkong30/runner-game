@@ -22,7 +22,7 @@ export class Enemy {
 	constructor() {
 		this.frameX = 0;
 		this.frameY = 0;
-		this.fps = 20;
+		this.fps = 10;
 		this.frameInterval = 1000 / this.fps;
 		this.frameTimer = 0;
 		this.shouldDelete = false;
@@ -50,6 +50,10 @@ export class Enemy {
 	}
 
 	draw(context: CanvasRenderingContext2D) {
+		if (this.game.debug) {
+			context.strokeRect(this.x, this.y, this.width, this.height);
+		}
+
 		context.drawImage(
 			this.image,
 			this.frameX * this.width,
