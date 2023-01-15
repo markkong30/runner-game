@@ -1,25 +1,25 @@
-import { Player } from '../player';
-import { Key, State } from '../types';
+import { Game } from '..';
+import { Key, State, StateName } from '../types';
 import { RootState } from './rootState';
 
 export class Sitting extends RootState {
-	player: Player;
+	game: Game;
 
-	constructor(player: Player) {
-		super('SITTING');
-		this.player = player;
+	constructor(game: Game) {
+		super(StateName.SITTING, game);
+		this.game = game;
 	}
 
 	enter() {
-		this.player.frameY = 5;
-		this.player.maxFrame = 4;
+		this.game.player.frameY = 5;
+		this.game.player.maxFrame = 4;
 	}
 
 	handleInput(input: Key[]) {
 		if (input.includes('ArrowLeft') || input.includes('ArrowRight')) {
-			this.player.setState(State.RUNNING, 1);
-		} else if (input.includes('ArrowUp')) {
-			this.player.setState(State.RUNNING, 1);
+			this.game.player.setState(State.RUNNING, 1);
+		} else if (input.includes(' ')) {
+			this.game.player.setState(State.ROLLING, 2);
 		}
 	}
 }

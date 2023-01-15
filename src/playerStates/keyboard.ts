@@ -1,5 +1,5 @@
-import { Game } from '.';
-import { Key } from './types';
+import { Game } from '..';
+import { Key } from '../types';
 
 const keys: string[] = [];
 

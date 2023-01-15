@@ -1,6 +1,7 @@
 import { Game } from './index';
 import { Falling } from './playerStates/Falling';
 import { Jumping } from './playerStates/Jumping';
+import { Rolling } from './playerStates/Rolling';
 import { Running } from './playerStates/Running';
 import { Sitting } from './playerStates/Sitting';
 import { Key, StateClass } from './types';
@@ -43,13 +44,12 @@ export class Player {
 		this.vy = 0;
 		this.gravity = 1;
 		this.states = [
-			new Sitting(this),
-			new Running(this),
-			new Jumping(this),
-			new Falling(this)
+			new Sitting(this.game),
+			new Running(this.game),
+			new Jumping(this.game),
+			new Falling(this.game),
+			new Rolling(this.game)
 		];
-		this.currentState = this.states[0];
-		this.currentState.enter();
 	}
 
 	update(input: Key[], deltaTime: number) {
@@ -129,7 +129,7 @@ export class Player {
 			if (
 				enemy.x < this.x + this.width &&
 				enemy.x + enemy.width > this.x &&
-				enemy.y + this.y + this.height &&
+				enemy.y < this.y + this.height &&
 				enemy.y + enemy.height > this.y
 			) {
 				enemy.shouldDelete = true;

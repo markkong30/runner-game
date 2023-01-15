@@ -4,7 +4,7 @@ import { ClimbingEnemy } from './enemies/climbingEnemy';
 import { Enemy } from './enemies/enemy';
 import { FlyingEnemy } from './enemies/flyingEnemy';
 import { GroundEnemy } from './enemies/groundEnemy';
-import { KeyboardHandler } from './keyboard';
+import { KeyboardHandler } from './playerStates/keyboard';
 import { Player } from './player';
 
 const canvas = document.querySelector<HTMLCanvasElement>(
@@ -47,6 +47,8 @@ export class Game {
 		this.debug = false;
 		this.score = 0;
 		this.fontColor = 'black';
+		this.player.currentState = this.player.states[0];
+		this.player.currentState.enter();
 	}
 
 	update(deltaTime: number) {

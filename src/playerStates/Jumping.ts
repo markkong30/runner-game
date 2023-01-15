@@ -1,27 +1,29 @@
-import { Player } from '../player';
-import { Key, State } from '../types';
+import { Game } from '..';
+import { Key, State, StateName } from '../types';
 import { RootState } from './rootState';
 
 export class Jumping extends RootState {
-	player: Player;
+	game: Game;
 
-	constructor(player: Player) {
-		super('JUMPING');
-		this.player = player;
+	constructor(game: Game) {
+		super(StateName.JUMPING, game);
+		this.game = game;
 	}
 
 	enter() {
-		this.player.frameY = 1;
-		this.player.maxFrame = 6;
+		this.game.player.frameY = 1;
+		this.game.player.maxFrame = 6;
 
-		if (this.player.onGround()) {
-			this.player.vy -= 25;
+		if (this.game.player.onGround()) {
+			this.game.player.vy -= 25;
 		}
 	}
 
 	handleInput(input: Key[]) {
-		if (this.player.vy > this.player.gravity) {
-			this.player.setState(State.FALLING, 1);
+		if (this.game.player.vy > this.game.player.gravity) {
+			this.game.player.setState(State.FALLING, 1);
+		} else if (input.includes(' ')) {
+			this.game.player.setState(State.ROLLING, 2);
 		}
 	}
 }
