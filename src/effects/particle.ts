@@ -16,6 +16,10 @@ export class Particle {
 		this.shouldDelete = false;
 	}
 
+	draw(context: CanvasRenderingContext2D) {
+		return;
+	}
+
 	update() {
 		this.x -= this.speedX + this.game.speed;
 		this.y -= this.speedY;

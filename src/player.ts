@@ -55,6 +55,7 @@ export class Player {
 	update(input: Key[], deltaTime: number) {
 		this.checkCollision();
 		this.currentState.handleInput(input);
+
 		// horizontal movement
 		this.x += this.speed;
 		if (input.includes('ArrowRight')) {

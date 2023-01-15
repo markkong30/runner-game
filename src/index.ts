@@ -6,6 +6,7 @@ import { FlyingEnemy } from './enemies/flyingEnemy';
 import { GroundEnemy } from './enemies/groundEnemy';
 import { KeyboardHandler } from './playerStates/keyboard';
 import { Player } from './player';
+import { Particle } from './effects/particle';
 
 const canvas = document.querySelector<HTMLCanvasElement>(
 	'#canvas-1'
@@ -27,6 +28,7 @@ export class Game {
 	enemies: Enemy[];
 	enemyTimer: number;
 	enemyInterval: number;
+	particles: Particle[];
 	debug: boolean;
 	score: number;
 	fontColor: string;
@@ -44,6 +46,7 @@ export class Game {
 		this.enemies = [];
 		this.enemyTimer = 0;
 		this.enemyInterval = 1000;
+		this.particles = [];
 		this.debug = false;
 		this.score = 0;
 		this.fontColor = 'black';
@@ -55,6 +58,7 @@ export class Game {
 		this.background.update();
 		this.player.update(this.input.keys, deltaTime);
 
+		// handle enemies
 		if (this.enemyTimer > this.enemyInterval) {
 			this.createEnemy();
 			this.enemyTimer = 0;
@@ -66,6 +70,16 @@ export class Game {
 			enemy.update(deltaTime);
 			this.enemies = this.enemies.filter((enemy) => !enemy.shouldDelete);
 		});
+
+		// handle effects
+		this.particles.forEach((particle) => {
+			particle.update();
+			if (particle.shouldDelete) {
+				this.particles = this.particles.filter(
+					(particle) => !particle.shouldDelete
+				);
+			}
+		});
 	}
 
 	draw(context: CanvasRenderingContext2D) {
@@ -74,6 +88,9 @@ export class Game {
 		this.display.draw(context);
 		this.enemies.forEach((enemy) => {
 			enemy.draw(context);
+		});
+		this.particles.forEach((particle) => {
+			particle.draw(context);
 		});
 	}
 
